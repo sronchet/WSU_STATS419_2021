@@ -1,0 +1,36 @@
+Package: humanVerseWSU
+Type: Package
+Title: Saving Human-Life Hours with "human-verse" forms of R functions
+Version: 0.1.4.2
+Authors@R: person( "Monte J. Shaffer", email = "monte.shaffer@gmail.com",
+  role = c("aut", "cre")  )
+Description: Manipulating dataframes, ...
+License: MIT + file LICENSE
+URL: https://github.com/MonteShaffer/humanVerseWSU/humanVerseWSU
+BugReports: https://github.com/MonteShaffer/humanVerseWSU/issues
+Encoding: UTF-8
+LazyData: true
+Imports:
+  colorspace,
+  curl,
+  dendextend,
+  digest,
+  factoextra,
+  httr,
+  magrittr,
+  matrixStats,
+  measurements,
+  nFactors,
+  psych,
+  pvclust,
+  RMariaDB,
+  readtext,
+  REdaS,
+  rlang,
+  rvest,
+  stats,
+  stringi,
+  stringr,
+  utils,
+  xml2
+RoxygenNote: 7.1.1
