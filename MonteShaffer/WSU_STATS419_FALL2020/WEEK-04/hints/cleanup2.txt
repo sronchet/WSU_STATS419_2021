@@ -1,0 +1,21 @@
+  df = read.csv("datasets/personality/personality-raw.txt",header=T,sep="|");
+  df = removeColumnsFromDataFrame(df, "V00");
+
+date.formats = c("year","week","day");
+   vec = df$date_test;
+year = convertDateStringToFormat(vec,"%Y","%m/%d/%Y %H:%M");
+week = convertDateStringToFormat(vec,"%W","%m/%d/%Y %H:%M");
+day  = convertDateStringToFormat(vec,"%j","%m/%d/%Y %H:%M");
+   newcols = cbind(year,week,day);
+     colnames(newcols) = date.formats;
+
+ndf = replaceDateStringWithDateColumns(df,"date_test",newcols);
+ndf = sortDataFrameByNumericColumns(ndf, date.formats, "DESC");
+ndf = removeDuplicatesFromDataFrame(ndf, "md5_email");
+
+ndf;
+ 
+write.table(ndf, file="datasets/personality/personality-clean.txt", sep="|", col.names=T, row.names=F);
+
+dim(df);  # 838
+dim(ndf); # 678
