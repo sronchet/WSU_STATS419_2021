@@ -1,7 +1,7 @@
 ---
 title: 'R Notebook example: Hello World'
-name: "PUT --YOUR NAME-- HERE"
-email: "PUT --your_wsu_email@wsu.edu-- HERE"
+name: "Sarah Ronchetti"
+email: "sarah.ronchetti@wsu.edu"
 output:
   html_document
 ---
@@ -17,6 +17,7 @@ parallel::detectCores();
 
 ```
 Can you find another library that counts cores?  Is it a core or a thread?
+Although I could not find another library that "counts cores," there is a function known as detectCores(logical = False). If it is possible, it will use the physical number of cores if it is false and or logical CPUs if it is true. 
 
 
 # Including our own functions
@@ -27,6 +28,7 @@ include.me = paste0(github.monte, "humanVerseWSU/master/humanVerseWSU/R/function
 
 include.me;
 ```
+
 
 ```{r}
 date.strings = c("3/24/2010 18:33", "9/3/2009 17:28", "10/14/2009 11:40",
@@ -55,9 +57,41 @@ years = convertDateStringToFormat(date.strings,
 years;
 str(years);
 ```
+```{r}
+weeks = convertDateStringToFormat(date.strings,
+                                  "%W", "weeks",
+                                  "%m/%d/%Y %H:%M");
+
+weeks; 
+str(weeks); 
+```
+```{r}
+days = convertDateStringToFormat(date.strings,
+                                  "%j", "days",
+                                  "%m/%d/%Y %H:%M");
+
+days; 
+str(days); 
+```
+
+```{r}
+ywd = convertDateStringToFormat(date.strings,
+                               c("%Y", "%W, %j"), c("year", "week","day"),
+                               "%m/%d/%Y %H:%M");
+
+ywd; 
+str(ywd); 
+```
 
 
 Can you execute the other examples:  weeks, days, ywd, Ymd below?  Where is the documentation about what each of the letters means?  Paste a URL here as a reference.  What does ISO mean?
+
+I was able to execute the first two examples, but when i tried to run the example for "ywd" it gave me an error. The error I got was "Error in dimnames(x) <- dn : length of 'dimnames' [2] not equal to array extent." I tried looking up the error and could not find where this is coming from. 
+
+I found a website that gives the documentation for each of the letters:
+https://statistics.berkeley.edu/computing/r-dates-times
+
+ISO means the International Organization for Standardization. 
 
 # Coupling elements together
 
@@ -70,43 +104,63 @@ x.rnorm = rnorm(n);
 x.runif = runif(n);
 ```
 What is `set.seed` doing?  How can you know.  What happens if you set the value to `NULL`?  How long does it have a memory?
+This function is generating random numbers between 1-9999 in the runif function call. When I set the value to NULL the output of the values increase in the runif output. 
 
 What is `rnorm` doing?  What about `runif`?  Why doesn't `rt(n)` work?
+'rnorm' is generating a vector of normally distributed random numbers. 'runif' is generating random deviates of the uniform distribution. 'rt(n)' wouldnt work because rt() is used to create a random sequence of values from a t-distribution, which is data we do not have so we wouldnt be able to use it. 
 
 ```{r}
 hist(x.rnorm);
 boxplot(x.rnorm);
 ```
 What do each of these show?  Why does Tukey like the boxplot over the histogram?  (e.g., he created the "box-and-whisker" plot, why?)
+Each of these shows a graph displaying the different normal distributions from the output of the data and the frequency. The boxplot is better because with a large amount of data, it allows you to compare multiple data sets and are less detailed to give a quick idea of the data in the output on different scales. 
 
 ```{r}
 x.rnorm.sample = sample(x.rnorm);
 
 plot(x.rnorm, x.rnorm.sample, xlab="x.rnorm", ylab="x.rnorm.sample");
-plot(x.rnorm, x.rnorm.sample, xlab="x.rnorm", ylab="x.rnorm.sample", asp=1);
+plot(x.rnorm, x.rnorm.sample, xlab="x.rnorm", ylab="x.rnorm.sample", asp=3);
 
 ```
 
 How is plotting the same data, but changing `asp` influencing our interpretation?  What is the correct approach?  Why?
+When you change the 'asp' it just returns the aspect ratio of the current plot with the coordinates. So by changing this, it does not change my interpretation because it would either make the graph larger or smaller based on the plots of the graph. By changing the 'asp' for example to 3, as i did above, you can see in the box-plot the data was condensed to a specific area. You could also just set the ratio equal to a number rather than using 'asp'.  
 
 TODO:  your turn.  hist, boxplot, plot for `x.runif` with the sampling element.  Notice the "parallel" code structure.  Notepad++ and Cntrl-H is your friend.  (minutes becomes seconds).
 
+```{r}
+hist(x.runif);
+boxplot(x.runif);
+```
+
+```{r}
+x.runif.sample = sample(x.runif);
+
+plot(x.runif, x.runif.sample, xlab="x.runif", ylab="x.runif.sample");
+plot(x.runif, x.runif.sample, xlab="x.runif", ylab="x.runif.sample", asp=1);
+
+```
+
 # Local Data provenance
 ```{r}
+github.monte = "https://raw.githubusercontent.com/MonteShaffer/"; # trailing slash
+
 local.data.path = "R:/R-data/";  # to store HTML files  # You change this to your "data" path, not your "code/github" path...
 
 path.wiki = paste0(local.data.path,"Wikipedia/");
 
 include.me = paste0(github.monte, "humanVerseWSU/master/humanVerseWSU/R/functions-file.R"); 
-source_url(include.me);
+source(include.me);
 
 createDirRecursive(path.wiki);
 ```
 
 Why would `createDirectoryRecursive` be a better name for this custom function?
+No, because with functions you want them to be direct and also descriptive at the same time. By abbreviating 'directory' the reviewer will know what the developer is referring to because you are working with data paths and directories. 
 
 ```{r}
-library(rvest);  # UGH!  Todo, get rid of these "tidyverse" dependencies
+#library(rvest);  # UGH!  Todo, get rid of these "tidyverse" dependencies
 library(magrittr); # how do you install these if you don't already have them?
 
 
@@ -121,11 +175,14 @@ wiki.info = wiki.downloadWikiPage(wiki.url, path.wiki);
     str(wiki.info);
 ```
 Look in your "data path"?  What do you see?  Why is this important for a "chain of custody"?
+In my data folder there is nothing there and it is empty. This is important for a "chain of custody" because it is evidence in uncovering computer-related crimes and leaves a "trail" documenting what data was tampered with or what happend to a specific piece of evidence in a crime.  
+
 
 ```{r}
 latlong = wiki.findCoordinates(wiki.info$path.wiki.page, wiki.info$wiki.html);     latlong;
 ```
 What does this function do?  What is the function name?  What would be a better function name?
+This function is taking a map from a web page and retrieving the coordinates and the latitude and longitude of the plots. The function name is wiki.findCoordinates. A function name that would be better for this is "getCoordinates." 
 
 ```{r}
 include.me = paste0(github.monte, "humanVerseWSU/master/humanVerseWSU/R/functions-search.R"); 
@@ -135,14 +192,21 @@ population = wiki.historicalPopulation(wiki.info$path.wiki.page, wiki.info$wiki.
     population;
 ```
 How could I suppress the `NAs introduced by coercion` warning?  Where in the code?
+You could use the suppressWarnings() function call. In the functions-date file you can change the as.numeric because some of the character strings are probably not being properly formatted. 
 
 ```{r}
 climate = wiki.parseAverageClimate(wiki.info$path.wiki.page, wiki.info$wiki.html);
   str(climate);  # doesn't exist ...
 ```
 Review the original WIKI page (WEB -> HTML CACHE).  Is this expected?
+Yes, because you are using your own data to access the web page. 
 
 TODO:  You do `https://en.wikipedia.org/wiki/Whitefish,_Montana` which should have climate.  Also do `YOUR TOWN OF CHOICE HERE` ... for each, the latlong, population, and climate.
+
+
+
+
+
 
 # Reading in some data
 

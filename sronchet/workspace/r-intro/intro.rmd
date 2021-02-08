@@ -1,0 +1,132 @@
+---
+title: 'R Notebook: Intro'
+author: "Sarah Ronchetti | 11515255"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+
+which.github = "local"; 
+
+github.local = "~/Desktop/WSU_STATS419_2021/sronchet/";
+github.remote = "https://raw.../";
+
+#if(which.github == "remote")
+#{ 
+  #include.me = paste0( github.remote, "functions/functions-intro.R"); 
+  #library(devtools); 
+  #source_url(include.me); 
+#} else {
+ # include.me = paste0(github.local, "functions/functions-intro.R"); 
+  #source(include.me); 
+#}
+
+
+
+```
+
+
+```{r}
+#HandShake Function
+library(FRACTION); 
+library(plotrix); 
+library(pracma); 
+
+is.wholenumber = function(x, tol = .Machine$double.eps^0.5)
+{
+  abs(x - round(x)) < tol; 
+}
+is.wholenumber(1)
+
+handShake = function(n = 1, plotMe = TRUE)
+{
+  if(n < 1)
+  {
+    stop("Error"); 
+  }
+  
+  if(!is.wholenumber(n))
+  {
+    stop("n must be an integer"); 
+  }
+  
+  h = n*(n-1)/2;
+  
+  if(plotMe)
+  {
+    plot(0,0, type = "n", main = paste0(h, " Handshakes for ", n," People"), xlim = c(-6,6), ylim = c(-6,6), asp = 1, xlab = "", ylab = "", xaxt = "n", yaxt = "n", bty = "n"); 
+      z = matrix(0, n, 2); 
+      draw.circle(0,0,1); 
+      x = 0; 
+      y = 0; 
+      
+      points(x,y);
+      #xs = c(xs, x); 
+      #ys = c(ys, y); 
+      
+      for(i in 1:n) #points
+      {
+        x = round(cos(2 * pi * i/n), digits = 4); 
+        y = round(sin(2 * pi * i/n), digits = 4); 
+        #xn = x * cos(deg2rad(angle)) - y * sin(deg2rad(angle)); 
+        #yn = y * cos(deg2rad(angle)) - x * sin(deg2rad(angle)); 
+        points(x = x, y = y, cex = 3); 
+        z[i,1] = x; 
+        z[i,2] = y; 
+      
+      }
+      
+      #drawing a line segment from source to target
+      for(j in 1:n) #source
+      {
+        for(k in 1:n) #target
+        {
+          segments(z[j,1], z[j,2], z[k,1], z[k,2]); 
+        }
+      }
+  }
+  
+  h; 
+}
+```
+
+# Alphabet Declaration of Independence 
+```{r}
+#reading in the "draft" document
+draft <- read.delim("~/Desktop/WSU_STATS419_2021/sronchet/datasets/declarationOfIndependence/draft.txt")
+
+#reading in the "unanimous draft" document
+unanimousDraft <- read.delim("~/Desktop/WSU_STATS419_2021/sronchet/datasets/declarationOfIndependence/final.txt")
+
+#function for counting letters of alaphabet for documents 
+countingFreqLetters <- function(f, l)
+{
+  d <- read.delim(f, header = FALSE, stringsAsFactors = FALSE, allowEscapes = FALSE, quote = "")
+  count <- table(strsplit(paste0(d[,], collapse = ""), ""))
+  if(l)
+  {
+    count[names(count)%in%c(letters, letters)]
+  }else{
+    count
+  }
+}
+
+#To run code, first type in the console:
+#file<-'~/Desktop/draft.txt'
+#countingFreqLetters(file, TRUE)
+
+#Do the same thing for 'final.txt'
+#Two tables should appear
+```
+
+
+# Determinant of 3x3 matrix 
+$3 \times 3$
+
+
+
+
+
+
