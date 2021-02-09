@@ -5,6 +5,15 @@ output:
   html_document:
     df_print: paged
 ---
+```{r}
+
+github.monte = "https://raw.githubusercontent.com/MonteShaffer/"; 
+include.me = paste0(github.monte, "humanVerseWSU/master/humanVerseWSU/R/functions-maths.R");
+
+library(devtools); 
+source_url(include.me); 
+
+```
 
 ```{r}
 
@@ -13,21 +22,21 @@ which.github = "local";
 github.local = "~/Desktop/WSU_STATS419_2021/sronchet/";
 github.remote = "https://raw.../";
 
-#if(which.github == "remote")
-#{ 
-  #include.me = paste0( github.remote, "functions/functions-intro.R"); 
-  #library(devtools); 
-  #source_url(include.me); 
-#} else {
- # include.me = paste0(github.local, "functions/functions-intro.R"); 
-  #source(include.me); 
-#}
+if(which.github == "remote")
+{ 
+  include.me = paste0( github.remote, "functions/functions-intro.R"); 
+  library(devtools); 
+  source_url(include.me); 
+} else {
+  include.me = paste0(github.local, "functions/functions-intro.R"); 
+  source(include.me); 
+}
 
 
 
 ```
 
-
+# HandShake
 ```{r}
 #HandShake Function
 library(FRACTION); 
@@ -94,39 +103,118 @@ handShake = function(n = 1, plotMe = TRUE)
 
 # Alphabet Declaration of Independence 
 ```{r}
-#reading in the "draft" document
-draft <- read.delim("~/Desktop/WSU_STATS419_2021/sronchet/datasets/declarationOfIndependence/draft.txt")
-
-#reading in the "unanimous draft" document
-unanimousDraft <- read.delim("~/Desktop/WSU_STATS419_2021/sronchet/datasets/declarationOfIndependence/final.txt")
-
-#function for counting letters of alaphabet for documents 
-countingFreqLetters <- function(f, l)
+countingLettersStr = function(str, letter)
 {
-  d <- read.delim(f, header = FALSE, stringsAsFactors = FALSE, allowEscapes = FALSE, quote = "")
-  count <- table(strsplit(paste0(d[,], collapse = ""), ""))
-  if(l)
-  {
-    count[names(count)%in%c(letters, letters)]
-  }else{
-    count
-  }
+  nchar(as.character(str)) -nchar( gsub(letter, "", str, fixed = TRUE));
 }
 
-#To run code, first type in the console:
-#file<-'~/Desktop/draft.txt'
-#countingFreqLetters(file, TRUE)
+countingFreqLetters = function(str)
+{
+  str = gsub("[[:space:]]", "", str);
+  str = tolower(str);
+  df = data.frame(matrix(0, nrow = 1, ncol = 27, byrow = TRUE)); 
+  colnames(df)=c(letters, "OTHER"); 
+  for(letter in letters)
+  {
+    i = which(letters == letter); 
+    df[1, i] = countingLettersStr(str, letter); 
+    str = gsub(letter, "", str, fixed = TRUE); 
+  }
+  df[1, 27] = nchar(str); 
+  df;
+}
+```
 
-#Do the same thing for 'final.txt'
-#Two tables should appear
+```{r}
+library(DT)
+path.declarationOfIndependence = paste0(github.local, "datasets/declarationOfIndependence/");
+final = readChar(paste0(path.declarationOfIndependence, "final.txt"),99999);
+draft = readChar(paste0(path.declarationOfIndependence, "draft.txt"),99999);
+
+#Used the library(DT) to create a data table to display the different results  
+df = NULL;
+df = rbind(df, countingFreqLetters(draft));
+df = rbind(df, countingFreqLetters(final));
+rownames(df) = c("Draft", "Final");
+datatable(df, colnames = c("a" = 2)) 
+```
+
+```{r}
+prop = df; #proportion
+prop[1, ] = prop[1, ] / sum(prop[1, ]);
+prop[2, ] = prop[2, ] / sum(prop[2, ]);
+rowSums(prop);
+```
+
+# Determinant of 3x3 matrix 
+```{r}
+computeDeterminant2 = function(myMatrix)
+{
+  nrow = nrow(myMatrix);
+  ncol = ncol(myMatrix); 
+  if(nrow != ncol)
+  {
+    stop("Matrix must be square"); 
+  }
+  if(nrow != 2)
+  {
+    stop("Matrix must be 2x2"); 
+  }
+  a = myMatrix[1,1];
+  b = myMatrix[1,2];
+  c = myMatrix[2,1];
+  d = myMatrix[2,2];
+  
+  a * d - b * c; 
+}
+
+
+computeDeterminant3 = function(myMatrix)
+{
+  nrow = nrow(myMatrix);
+  ncol = ncol(myMatrix); 
+  if(nrow != ncol)
+  {
+    stop("Matrix must be square"); 
+  }
+  if(nrow != 3)
+  {
+    stop("Matrix must be 3x3"); 
+  }
+  a = myMatrix[1,1];
+  b = myMatrix[1,2];
+  c = myMatrix[1,3];
+  d = myMatrix[2,1];
+  e = myMatrix[2,2];
+  f = myMatrix[2,3];
+  g = myMatrix[3,1];
+  h = myMatrix[3,2];
+  i = myMatrix[3,3];
+  
+  a * computeDeterminant2(matrix(c(e,f,h,i), nrow = 2, byrow = TRUE)) - b * computeDeterminant2(matrix(c(d,f,g,i), nrow = 2, byrow = TRUE)) + c * computeDeterminant2(matrix(c(d,e,g,h), nrow = 2, byrow = TRUE)); 
+}
+
 ```
 
 
-# Determinant of 3x3 matrix 
-$3 \times 3$
+```{r}
+myMatrix = matrix(c(1,2,3,
+                    4,5,6,
+                    7,8,9), nrow = 3, byrow = TRUE); 
 
+zeroIsh(det(myMatrix));
+zeroIsh(computeDeterminant3(myMatrix));
+```
 
+```{r}
+#We used the zeroIsh function to able to get a finite number of 0 instead of a number that is close to 0
+myMatrix = matrix(c(4,8,25,
+                    4,56,6,
+                    7,45,9), nrow = 3, byrow = TRUE); 
 
+zeroIsh(det(myMatrix));
+zeroIsh(computeDeterminant3(myMatrix));
+```
 
 
 
