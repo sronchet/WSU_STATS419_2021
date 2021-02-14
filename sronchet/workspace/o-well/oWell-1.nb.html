@@ -239,84 +239,53 @@ summary {
 
 
 <!-- rnb-text-begin -->
-<p>#oWell</p>
+<p>#oWell ##Here we are setting up our Git remote and Git local to access the data</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuZ2l0aHViLmxvY2FsIDwtIFxcfi9EZXNrdG9wL1dTVV9TVEFUUzQxOV8yMDIxL3Nyb25jaGV0L1xcOyBcbnBhdGggPSBwYXN0ZTAoZ2l0aHViLmxvY2FsLlxcL3dvcmtzcGFjZS9vLXdlbGxcXCk7XG5cbmBgYFxuYGBgIn0= -->
-<pre class="r"><code>```r
-github.local &lt;- \~/Desktop/WSU_STATS419_2021/sronchet/\; 
-path = paste0(github.local.\/workspace/o-well\);
-</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2hpY2guZ2l0aHViID0gXCJsb2NhbFwiO1xuZ2l0aHViLmxvY2FsID0gXCJ+L0Rlc2t0b3AvV1NVX1NUQVRTNDE5XzIwMjEvc3JvbmNoZXQvXCI7XG5naXRodWIucmVtb3RlID0gXCJodHRwczovL2dpdGh1Yi5jb20vc3JvbmNoZXQvV1NVX1NUQVRTNDE5XzIwMjEuZ2l0XCI7XG5cblxuaWYod2hpY2guZ2l0aHViID09IFwicmVtb3RlXCIpXG57XG4gIG15cGF0aCA9IHBhc3RlMChnaXRodWIucmVtb3RlLFwiL3dvcmtzcGFjZS9vLXdlbGxcIik7XG59ZWxzZXtcbiAgbXlwYXRoID0gcGFzdGUwKGdpdGh1Yi5sb2NhbCxcIi93b3Jrc3BhY2Uvby13ZWxsXCIpO1xufVxuXG5gYGAifQ== -->
+<pre class="r"><code>which.github = &quot;local&quot;;
+github.local = &quot;~/Desktop/WSU_STATS419_2021/sronchet/&quot;;
+github.remote = &quot;https://github.com/sronchet/WSU_STATS419_2021.git&quot;;
 
 
-&lt;!-- rnb-text-begin --&gt;
-
-
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuXG4jcmVhZCBpbiB0aGUgZGF0YSBzZXRzIFxub3dlbGwubWV0YWxzID0gcmVhZC5kZWxpbShwYXN0ZTAocGF0aCxcXG93ZWxsLm1ldGFscy50eHRcXCksIGhlYWRlciA9IFRSVUUsIHNlcD1cXHxcXCk7XG5vd2VsbC5jaGVtaXN0cnkgPSByZWFkLmRlbGltKHBhc3RlMChwYXRoLCBcXG93ZWxsLmNoZW1pc3RyeS50eHRcXCksIGhlYWRlciA9IFRSVUUsIHNlcD1cXHxcXCk7XG53ZWxsLmxvY2F0aW9uID0gcmVhZC5kZWxpbShwYXN0ZTAocGF0aCwgXFx3ZWxscy1sb2NhdGlvbi50eHRcXCksIGhlYWRlcj0gVFJVRSwgc2VwID0gXFx8XFwpO1xuXG5cblxuXG5cblxuXG5gYGBcbmBgYCJ9 --&gt;
-
-```r
-```r
-
-#read in the data sets 
-owell.metals = read.delim(paste0(path,\owell.metals.txt\), header = TRUE, sep=\|\);
-owell.chemistry = read.delim(paste0(path, \owell.chemistry.txt\), header = TRUE, sep=\|\);
-well.location = read.delim(paste0(path, \wells-location.txt\), header= TRUE, sep = \|\);
-</code></pre>
-<pre><code>
-&lt;!-- rnb-source-end --&gt;
-
-&lt;!-- rnb-chunk-end --&gt;
-
-
-&lt;!-- rnb-text-begin --&gt;
-
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2J1aWxkaW5nIGRhdGEgb2JqZWN0XG5vd2VsbC5tZXRhbHMkbGF0aXR1ZGUgPSB3ZWxsLmxvY2F0aW9uJGxhdGl0dWRlO1xub3dlbGwubWV0YWxzJGxvbmdpdHVkZSA9IHdlbGwubG9jYXRpb24kbG9uZ2l0dWRlO1xub3dlbGwubWV0YWxzJGFsdGl0dWRlLmZ0ID0gd2VsbC5sb2NhdGlvbiRhbHRpdHVkZS5mdDtcbm93ZWxsLm1ldGFscyRmYXVsdCA9IHdlbGwubG9jYXRpb24kZmF1bHQ7XG5vd2VsbC5tZXRhbHMkZ2VvbG9neSA9IHdlbGwubG9jYXRpb24kZ2VvbG9neTtcblxub3dlbGwuY2hlbWlzdHJ5JGxhdGl0dWRlID0gd2VsbC5sb2NhdGlvbiRsYXRpdHVkZTtcbm93ZWxsLmNoZW1pc3RyeSRsb25naXR1ZGUgPSB3ZWxsLmxvY2F0aW9uJGxvbmdpdHVkZTtcbm93ZWxsLmNoZW1pc3RyeSRhbHRpdHVkZS5mdCA9IHdlbGwubG9jYXRpb24kYWx0aXR1ZGUuZnQ7XG5vd2VsbC5jaGVtaXN0cnkkZmF1bHQgPSB3ZWxsLmxvY2F0aW9uJGZhdWx0O1xub3dlbGwuY2hlbWlzdHJ5JGdlb2xvZ3kgPSB3ZWxsLmxvY2F0aW9uJGdlb2xvZ3k7XG5cbm15bGlzdCA9IGxpc3Qob3dlbGwuY2hlbWlzdHJ5LCBvd2VsbC5tZXRhbHMpXG5uYW1lcyhteWxpc3QpID0gYyhcIndlbGxzJHNhdWRpJGNoZW1pc3RyeVwiLFwid2VsbHMkc2F1ZGkkbWV0YWxzXCIpXG5cbmBgYCJ9 --&gt;
-
-```r
-#building data object
-owell.metals$latitude = well.location$latitude;
-owell.metals$longitude = well.location$longitude;
-owell.metals$altitude.ft = well.location$altitude.ft;
-owell.metals$fault = well.location$fault;
-owell.metals$geology = well.location$geology;
-
-owell.chemistry$latitude = well.location$latitude;
-owell.chemistry$longitude = well.location$longitude;
-owell.chemistry$altitude.ft = well.location$altitude.ft;
-owell.chemistry$fault = well.location$fault;
-owell.chemistry$geology = well.location$geology;
-
-mylist = list(owell.chemistry, owell.metals)
-names(mylist) = c(&quot;wells$saudi$chemistry&quot;,&quot;wells$saudi$metals&quot;)
+if(which.github == &quot;remote&quot;)
+{
+  mypath = paste0(github.remote,&quot;/workspace/o-well&quot;);
+}else{
+  mypath = paste0(github.local,&quot;/workspace/o-well&quot;);
+}
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3NhdmUgZGF0YSBsaXN0IHRvIGEgZmlsZVxubXlmaWxlID0gcGFzdGUwKG15cGF0aCwgXCJ3ZWxscy5yZHNcIilcbnNhdmVSRFMobXlsaXN0LGZpbGUgPSBteWZpbGUpXG5cbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGF0aC5kYXRhID0gcGFzdGUwKG15cGF0aCwgXCJkYXRhL1wiKVxuI3JlYWQgaW4gdGhlIGRhdGEgc2V0cyBcbm93ZWxsLm1ldGFscyA9IHJlYWQuZGVsaW0ocGFzdGUwKHBhdGgsXCJvd2VsbC5tZXRhbHMudHh0XCIpLCBoZWFkZXIgPSBUUlVFLCBzZXA9XCJ8XCIpO1xuYGBgIn0= -->
+<pre class="r"><code>path.data = paste0(mypath, &quot;data/&quot;)
+#read in the data sets 
+owell.metals = read.delim(paste0(path,&quot;owell.metals.txt&quot;), header = TRUE, sep=&quot;|&quot;);</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gcGFzdGUwKHBhdGgsIFwib3dlbGwubWV0YWxzLnR4dFwiKSA6IG9iamVjdCAncGF0aCcgbm90IGZvdW5kXG4ifQ== -->
+<pre><code>Error in paste0(path, &quot;owell.metals.txt&quot;) : object &#39;path&#39; not found</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2J1aWxkaW5nIGRhdGEgb2JqZWN0XG5vd2VsbC5tZXRhbHMkbGF0aXR1ZGUgPSB3ZWxsLmxvY2F0aW9uJGxhdGl0dWRlO1xuYGBgIn0= -->
+<pre class="r"><code>#building data object
+owell.metals$latitude = well.location$latitude;</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IG9iamVjdCAnd2VsbC5sb2NhdGlvbicgbm90IGZvdW5kXG4ifQ== -->
+<pre><code>Error: object &#39;well.location&#39; not found</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3NhdmUgZGF0YSBsaXN0IHRvIGEgZmlsZVxubXlmaWxlID0gcGFzdGUwKHBhdGguZGF0YSwgXCJ3ZWxscy5yZHNcIilcbnNhdmVSRFMobXlsaXN0LGZpbGUgPSBteWZpbGUpXG5cbmBgYCJ9 -->
 <pre class="r"><code>#save data list to a file
-myfile = paste0(mypath, &quot;wells.rds&quot;)
+myfile = paste0(path.data, &quot;wells.rds&quot;)
 saveRDS(mylist,file = myfile)
 </code></pre>
 <!-- rnb-source-end -->
@@ -324,7 +293,7 @@ saveRDS(mylist,file = myfile)
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vazogb1dlbGwtUGFydCAxIgphdXRob3I6ICJTYXJhaCBSb25jaGV0dGkgW3NhcmFoLnJvbmNoZXR0aV0iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiNvV2VsbCAKYGBge3J9CmdpdGh1Yi5sb2NhbCA8LSAifi9EZXNrdG9wL1dTVV9TVEFUUzQxOV8yMDIxL3Nyb25jaGV0LyI7IApwYXRoID0gcGFzdGUwKGdpdGh1Yi5sb2NhbCwiL3dvcmtzcGFjZS9vLXdlbGwiKTsKCmBgYAoKCmBgYHtyfQoKI3JlYWQgaW4gdGhlIGRhdGEgc2V0cyAKb3dlbGwubWV0YWxzID0gcmVhZC5kZWxpbShwYXN0ZTAocGF0aCwib3dlbGwubWV0YWxzLnR4dCIpLCBoZWFkZXIgPSBUUlVFLCBzZXA9InwiKTsKb3dlbGwuY2hlbWlzdHJ5ID0gcmVhZC5kZWxpbShwYXN0ZTAocGF0aCwgIm93ZWxsLmNoZW1pc3RyeS50eHQiKSwgaGVhZGVyID0gVFJVRSwgc2VwPSJ8Iik7CndlbGwubG9jYXRpb24gPSByZWFkLmRlbGltKHBhc3RlMChwYXRoLCAid2VsbHMtbG9jYXRpb24udHh0IiksIGhlYWRlcj0gVFJVRSwgc2VwID0gInwiKTsKYGBgCgpgYGB7cn0KI2J1aWxkaW5nIGRhdGEgb2JqZWN0Cm93ZWxsLm1ldGFscyRsYXRpdHVkZSA9IHdlbGwubG9jYXRpb24kbGF0aXR1ZGU7Cm93ZWxsLm1ldGFscyRsb25naXR1ZGUgPSB3ZWxsLmxvY2F0aW9uJGxvbmdpdHVkZTsKb3dlbGwubWV0YWxzJGFsdGl0dWRlLmZ0ID0gd2VsbC5sb2NhdGlvbiRhbHRpdHVkZS5mdDsKb3dlbGwubWV0YWxzJGZhdWx0ID0gd2VsbC5sb2NhdGlvbiRmYXVsdDsKb3dlbGwubWV0YWxzJGdlb2xvZ3kgPSB3ZWxsLmxvY2F0aW9uJGdlb2xvZ3k7Cgpvd2VsbC5jaGVtaXN0cnkkbGF0aXR1ZGUgPSB3ZWxsLmxvY2F0aW9uJGxhdGl0dWRlOwpvd2VsbC5jaGVtaXN0cnkkbG9uZ2l0dWRlID0gd2VsbC5sb2NhdGlvbiRsb25naXR1ZGU7Cm93ZWxsLmNoZW1pc3RyeSRhbHRpdHVkZS5mdCA9IHdlbGwubG9jYXRpb24kYWx0aXR1ZGUuZnQ7Cm93ZWxsLmNoZW1pc3RyeSRmYXVsdCA9IHdlbGwubG9jYXRpb24kZmF1bHQ7Cm93ZWxsLmNoZW1pc3RyeSRnZW9sb2d5ID0gd2VsbC5sb2NhdGlvbiRnZW9sb2d5OwoKbXlsaXN0ID0gbGlzdChvd2VsbC5jaGVtaXN0cnksIG93ZWxsLm1ldGFscykKbmFtZXMobXlsaXN0KSA9IGMoIndlbGxzJHNhdWRpJGNoZW1pc3RyeSIsIndlbGxzJHNhdWRpJG1ldGFscyIpCgpgYGAKCmBgYHtyfQojc2F2ZSBkYXRhIGxpc3QgdG8gYSBmaWxlCm15ZmlsZSA9IHBhc3RlMChteXBhdGgsICJ3ZWxscy5yZHMiKQpzYXZlUkRTKG15bGlzdCxmaWxlID0gbXlmaWxlKQoKYGBgCgoKCgoKCgoKCgoKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vazogb1dlbGwtUGFydCAxIgphdXRob3I6ICJTYXJhaCBSb25jaGV0dGkgW3NhcmFoLnJvbmNoZXR0aV0iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiNvV2VsbCAKIyNIZXJlIHdlIGFyZSBzZXR0aW5nIHVwIG91ciBHaXQgcmVtb3RlIGFuZCBHaXQgbG9jYWwgdG8gYWNjZXNzIHRoZSBkYXRhIApgYGB7cn0Kd2hpY2guZ2l0aHViID0gImxvY2FsIjsKZ2l0aHViLmxvY2FsID0gIn4vRGVza3RvcC9XU1VfU1RBVFM0MTlfMjAyMS9zcm9uY2hldC8iOwpnaXRodWIucmVtb3RlID0gImh0dHBzOi8vZ2l0aHViLmNvbS9zcm9uY2hldC9XU1VfU1RBVFM0MTlfMjAyMS5naXQiOwoKCmlmKHdoaWNoLmdpdGh1YiA9PSAicmVtb3RlIikKewogIG15cGF0aCA9IHBhc3RlMChnaXRodWIucmVtb3RlLCIvd29ya3NwYWNlL28td2VsbCIpOwp9ZWxzZXsKICBteXBhdGggPSBwYXN0ZTAoZ2l0aHViLmxvY2FsLCIvd29ya3NwYWNlL28td2VsbCIpOwp9CgpgYGAKCgpgYGB7cn0KcGF0aC5kYXRhID0gcGFzdGUwKG15cGF0aCwgImRhdGEvIikKI3JlYWQgaW4gdGhlIGRhdGEgc2V0cyAKb3dlbGwubWV0YWxzID0gcmVhZC5kZWxpbShwYXN0ZTAocGF0aC5kYXRhLCJvd2VsbC5tZXRhbHMudHh0IiksIGhlYWRlciA9IFRSVUUsIHNlcD0ifCIpOwpvd2VsbC5jaGVtaXN0cnkgPSByZWFkLmRlbGltKHBhc3RlMChwYXRoLmRhdGEsICJvd2VsbC5jaGVtaXN0cnkudHh0IiksIGhlYWRlciA9IFRSVUUsIHNlcD0ifCIpOwp3ZWxsLmxvY2F0aW9uID0gcmVhZC5kZWxpbShwYXN0ZTAocGF0aC5kYXRhLCAid2VsbHMtbG9jYXRpb24udHh0IiksIGhlYWRlcj0gVFJVRSwgc2VwID0gInwiKTsKYGBgCgpgYGB7cn0KI2J1aWxkaW5nIGRhdGEgb2JqZWN0Cm93ZWxsLm1ldGFscyRsYXRpdHVkZSA9IHdlbGwubG9jYXRpb24kbGF0aXR1ZGU7Cm93ZWxsLm1ldGFscyRsb25naXR1ZGUgPSB3ZWxsLmxvY2F0aW9uJGxvbmdpdHVkZTsKb3dlbGwubWV0YWxzJGFsdGl0dWRlLmZ0ID0gd2VsbC5sb2NhdGlvbiRhbHRpdHVkZS5mdDsKb3dlbGwubWV0YWxzJGZhdWx0ID0gd2VsbC5sb2NhdGlvbiRmYXVsdDsKb3dlbGwubWV0YWxzJGdlb2xvZ3kgPSB3ZWxsLmxvY2F0aW9uJGdlb2xvZ3k7Cgpvd2VsbC5jaGVtaXN0cnkkbGF0aXR1ZGUgPSB3ZWxsLmxvY2F0aW9uJGxhdGl0dWRlOwpvd2VsbC5jaGVtaXN0cnkkbG9uZ2l0dWRlID0gd2VsbC5sb2NhdGlvbiRsb25naXR1ZGU7Cm93ZWxsLmNoZW1pc3RyeSRhbHRpdHVkZS5mdCA9IHdlbGwubG9jYXRpb24kYWx0aXR1ZGUuZnQ7Cm93ZWxsLmNoZW1pc3RyeSRmYXVsdCA9IHdlbGwubG9jYXRpb24kZmF1bHQ7Cm93ZWxsLmNoZW1pc3RyeSRnZW9sb2d5ID0gd2VsbC5sb2NhdGlvbiRnZW9sb2d5OwoKbXlsaXN0ID0gbGlzdChvd2VsbC5jaGVtaXN0cnksIG93ZWxsLm1ldGFscykKbmFtZXMobXlsaXN0KSA9IGMoIndlbGxzJHNhdWRpJGNoZW1pc3RyeSIsIndlbGxzJHNhdWRpJG1ldGFscyIpCgpgYGAKCmBgYHtyfQojc2F2ZSBkYXRhIGxpc3QgdG8gYSBmaWxlCm15ZmlsZSA9IHBhc3RlMChwYXRoLmRhdGEsICJ3ZWxscy5yZHMiKQpzYXZlUkRTKG15bGlzdCxmaWxlID0gbXlmaWxlKQoKYGBgCgoKCgoKCgoKCgoKCg==</div>
 
 
 
