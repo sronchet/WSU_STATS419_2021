@@ -7,7 +7,7 @@ output: html_notebook
 #oWell 
 ```{r}
 github.local <- "~/Desktop/WSU_STATS419_2021/sronchet/"; 
-path = paste0(github.local."/workspace/o-well");
+path = paste0(github.local,"/workspace/o-well");
 
 ```
 
@@ -18,11 +18,42 @@ path = paste0(github.local."/workspace/o-well");
 owell.metals = read.delim(paste0(path,"owell.metals.txt"), header = TRUE, sep="|");
 owell.chemistry = read.delim(paste0(path, "owell.chemistry.txt"), header = TRUE, sep="|");
 well.location = read.delim(paste0(path, "wells-location.txt"), header= TRUE, sep = "|");
+```
 
+```{r}
+#building data object
+owell.metals$latitude = well.location$latitude;
+owell.metals$longitude = well.location$longitude;
+owell.metals$altitude.ft = well.location$altitude.ft;
+owell.metals$fault = well.location$fault;
+owell.metals$geology = well.location$geology;
 
+owell.chemistry$latitude = well.location$latitude;
+owell.chemistry$longitude = well.location$longitude;
+owell.chemistry$altitude.ft = well.location$altitude.ft;
+owell.chemistry$fault = well.location$fault;
+owell.chemistry$geology = well.location$geology;
 
-
-
-
+mylist = list(owell.chemistry, owell.metals)
+names(mylist) = c("wells$saudi$chemistry","wells$saudi$metals")
 
 ```
+
+```{r}
+#save data list to a file
+myfile = paste0(mypath, "wells.rds")
+saveRDS(mylist,file = myfile)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
