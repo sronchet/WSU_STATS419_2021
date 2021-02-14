@@ -7,10 +7,9 @@ output: html_notebook
 #oWell 
 ##Here we are setting up our Git remote and Git local to access the data 
 ```{r}
-which.github = "local";
+which.github = "remote";
 github.local = "~/Desktop/WSU_STATS419_2021/sronchet/";
-github.remote = "https://github.com/sronchet/WSU_STATS419_2021.git";
-
+github.remote = "https://raw.githubusercontent.com/sronchet/WSU_STATS419_2021/main";
 
 if(which.github == "remote")
 {
