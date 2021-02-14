@@ -1,0 +1,28 @@
+---
+title: "R Notebook: oWell-Part 1"
+author: "Sarah Ronchetti [sarah.ronchetti]"
+output: html_notebook
+---
+
+#oWell 
+```{r}
+github.local <- "~/Desktop/WSU_STATS419_2021/sronchet/"; 
+path = paste0(github.local."/workspace/o-well");
+
+```
+
+
+```{r}
+
+#read in the data sets 
+owell.metals = read.delim(paste0(path,"owell.metals.txt"), header = TRUE, sep="|");
+owell.chemistry = read.delim(paste0(path, "owell.chemistry.txt"), header = TRUE, sep="|");
+well.location = read.delim(paste0(path, "wells-location.txt"), header= TRUE, sep = "|");
+
+
+
+
+
+
+
+```
