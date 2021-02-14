@@ -23,13 +23,14 @@ if(which.github == "remote")
 
 
 ```{r}
-path.data = paste0(mypath, "data/")
+path.data = paste0(mypath, "/data/")
 #read in the data sets 
 owell.metals = read.delim(paste0(path.data,"owell.metals.txt"), header = TRUE, sep="|");
 owell.chemistry = read.delim(paste0(path.data, "owell.chemistry.txt"), header = TRUE, sep="|");
 well.location = read.delim(paste0(path.data, "wells-location.txt"), header= TRUE, sep = "|");
 ```
 
+##This is how we are building the data object so we can access and append the data sets we created.
 ```{r}
 #building data object
 owell.metals$latitude = well.location$latitude;
@@ -49,10 +50,37 @@ names(mylist) = c("wells$saudi$chemistry","wells$saudi$metals")
 
 ```
 
+##These are functions given to us by the professor in order to read in the data with pipes. 
 ```{r}
-#save data list to a file
-myfile = paste0(path.data, "wells.rds")
-saveRDS(mylist,file = myfile)
+storeToPipe = function(df, file, header=TRUE, quote="", sep="|", row.names = FALSE)
+{
+  if(quote == "")
+  {
+    quote = FALSE;
+  }
+  utils::write.table(df, file=file, quote = quote, col.names = header, row.name = row.names, sep = sep);
+}
+
+readFromPipe = function(file,header=TRUE, quote="", sep="|")
+{
+  utils::read.csv(file,header=header, quote=quote,sep=sep);
+}
+
+```
+
+##This will save data list to a file if local. If it is remote, then the professor is able to access my files.
+
+```{r}
+if(which.github != "remote")
+{
+  myfile = paste0(path.data, "wells.rds")
+  saveRDS(mylist,file = myfile)
+  myfile = paste0(path.data, "wells.txt")
+  storeToPipe(mylist,file = myfile)
+}else{
+  myfile = paste0(path.data, "wells.txt")
+  print(myfile);
+}
 
 ```
 

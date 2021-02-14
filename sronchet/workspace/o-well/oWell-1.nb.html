@@ -260,40 +260,81 @@ if(which.github == &quot;remote&quot;)
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGF0aC5kYXRhID0gcGFzdGUwKG15cGF0aCwgXCJkYXRhL1wiKVxuI3JlYWQgaW4gdGhlIGRhdGEgc2V0cyBcbm93ZWxsLm1ldGFscyA9IHJlYWQuZGVsaW0ocGFzdGUwKHBhdGgsXCJvd2VsbC5tZXRhbHMudHh0XCIpLCBoZWFkZXIgPSBUUlVFLCBzZXA9XCJ8XCIpO1xuYGBgIn0= -->
-<pre class="r"><code>path.data = paste0(mypath, &quot;data/&quot;)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGF0aC5kYXRhID0gcGFzdGUwKG15cGF0aCwgXCIvZGF0YS9cIilcbiNyZWFkIGluIHRoZSBkYXRhIHNldHMgXG5vd2VsbC5tZXRhbHMgPSByZWFkLmRlbGltKHBhc3RlMChwYXRoLmRhdGEsXCJvd2VsbC5tZXRhbHMudHh0XCIpLCBoZWFkZXIgPSBUUlVFLCBzZXA9XCJ8XCIpO1xub3dlbGwuY2hlbWlzdHJ5ID0gcmVhZC5kZWxpbShwYXN0ZTAocGF0aC5kYXRhLCBcIm93ZWxsLmNoZW1pc3RyeS50eHRcIiksIGhlYWRlciA9IFRSVUUsIHNlcD1cInxcIik7XG53ZWxsLmxvY2F0aW9uID0gcmVhZC5kZWxpbShwYXN0ZTAocGF0aC5kYXRhLCBcIndlbGxzLWxvY2F0aW9uLnR4dFwiKSwgaGVhZGVyPSBUUlVFLCBzZXAgPSBcInxcIik7XG5gYGAifQ== -->
+<pre class="r"><code>path.data = paste0(mypath, &quot;/data/&quot;)
 #read in the data sets 
-owell.metals = read.delim(paste0(path,&quot;owell.metals.txt&quot;), header = TRUE, sep=&quot;|&quot;);</code></pre>
+owell.metals = read.delim(paste0(path.data,&quot;owell.metals.txt&quot;), header = TRUE, sep=&quot;|&quot;);
+owell.chemistry = read.delim(paste0(path.data, &quot;owell.chemistry.txt&quot;), header = TRUE, sep=&quot;|&quot;);
+well.location = read.delim(paste0(path.data, &quot;wells-location.txt&quot;), header= TRUE, sep = &quot;|&quot;);</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gcGFzdGUwKHBhdGgsIFwib3dlbGwubWV0YWxzLnR4dFwiKSA6IG9iamVjdCAncGF0aCcgbm90IGZvdW5kXG4ifQ== -->
-<pre><code>Error in paste0(path, &quot;owell.metals.txt&quot;) : object &#39;path&#39; not found</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>##This is how we are building the data object so we can access and append the data sets we created.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2J1aWxkaW5nIGRhdGEgb2JqZWN0XG5vd2VsbC5tZXRhbHMkbGF0aXR1ZGUgPSB3ZWxsLmxvY2F0aW9uJGxhdGl0dWRlO1xuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2J1aWxkaW5nIGRhdGEgb2JqZWN0XG5vd2VsbC5tZXRhbHMkbGF0aXR1ZGUgPSB3ZWxsLmxvY2F0aW9uJGxhdGl0dWRlO1xub3dlbGwubWV0YWxzJGxvbmdpdHVkZSA9IHdlbGwubG9jYXRpb24kbG9uZ2l0dWRlO1xub3dlbGwubWV0YWxzJGFsdGl0dWRlLmZ0ID0gd2VsbC5sb2NhdGlvbiRhbHRpdHVkZS5mdDtcbm93ZWxsLm1ldGFscyRmYXVsdCA9IHdlbGwubG9jYXRpb24kZmF1bHQ7XG5vd2VsbC5tZXRhbHMkZ2VvbG9neSA9IHdlbGwubG9jYXRpb24kZ2VvbG9neTtcblxub3dlbGwuY2hlbWlzdHJ5JGxhdGl0dWRlID0gd2VsbC5sb2NhdGlvbiRsYXRpdHVkZTtcbm93ZWxsLmNoZW1pc3RyeSRsb25naXR1ZGUgPSB3ZWxsLmxvY2F0aW9uJGxvbmdpdHVkZTtcbm93ZWxsLmNoZW1pc3RyeSRhbHRpdHVkZS5mdCA9IHdlbGwubG9jYXRpb24kYWx0aXR1ZGUuZnQ7XG5vd2VsbC5jaGVtaXN0cnkkZmF1bHQgPSB3ZWxsLmxvY2F0aW9uJGZhdWx0O1xub3dlbGwuY2hlbWlzdHJ5JGdlb2xvZ3kgPSB3ZWxsLmxvY2F0aW9uJGdlb2xvZ3k7XG5cbm15bGlzdCA9IGxpc3Qob3dlbGwuY2hlbWlzdHJ5LCBvd2VsbC5tZXRhbHMpXG5uYW1lcyhteWxpc3QpID0gYyhcIndlbGxzJHNhdWRpJGNoZW1pc3RyeVwiLFwid2VsbHMkc2F1ZGkkbWV0YWxzXCIpXG5cbmBgYCJ9 -->
 <pre class="r"><code>#building data object
-owell.metals$latitude = well.location$latitude;</code></pre>
+owell.metals$latitude = well.location$latitude;
+owell.metals$longitude = well.location$longitude;
+owell.metals$altitude.ft = well.location$altitude.ft;
+owell.metals$fault = well.location$fault;
+owell.metals$geology = well.location$geology;
+
+owell.chemistry$latitude = well.location$latitude;
+owell.chemistry$longitude = well.location$longitude;
+owell.chemistry$altitude.ft = well.location$altitude.ft;
+owell.chemistry$fault = well.location$fault;
+owell.chemistry$geology = well.location$geology;
+
+mylist = list(owell.chemistry, owell.metals)
+names(mylist) = c(&quot;wells$saudi$chemistry&quot;,&quot;wells$saudi$metals&quot;)
+</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IG9iamVjdCAnd2VsbC5sb2NhdGlvbicgbm90IGZvdW5kXG4ifQ== -->
-<pre><code>Error: object &#39;well.location&#39; not found</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>##These are functions given to us by the professor in order to read in the data with pipes.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3NhdmUgZGF0YSBsaXN0IHRvIGEgZmlsZVxubXlmaWxlID0gcGFzdGUwKHBhdGguZGF0YSwgXCJ3ZWxscy5yZHNcIilcbnNhdmVSRFMobXlsaXN0LGZpbGUgPSBteWZpbGUpXG5cbmBgYCJ9 -->
-<pre class="r"><code>#save data list to a file
-myfile = paste0(path.data, &quot;wells.rds&quot;)
-saveRDS(mylist,file = myfile)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3RvcmVUb1BpcGUgPSBmdW5jdGlvbihkZiwgZmlsZSwgaGVhZGVyPVRSVUUsIHF1b3RlPVwiXCIsIHNlcD1cInxcIiwgcm93Lm5hbWVzID0gRkFMU0UpXG57XG4gIGlmKHF1b3RlID09IFwiXCIpXG4gIHtcbiAgICBxdW90ZSA9IEZBTFNFO1xuICB9XG4gIHV0aWxzOjp3cml0ZS50YWJsZShkZiwgZmlsZT1maWxlLCBxdW90ZSA9IHF1b3RlLCBjb2wubmFtZXMgPSBoZWFkZXIsIHJvdy5uYW1lID0gcm93Lm5hbWVzLCBzZXAgPSBzZXApO1xufVxuXG5yZWFkRnJvbVBpcGUgPSBmdW5jdGlvbihmaWxlLGhlYWRlcj1UUlVFLCBxdW90ZT1cIlwiLCBzZXA9XCJ8XCIpXG57XG4gIHV0aWxzOjpyZWFkLmNzdihmaWxlLGhlYWRlcj1oZWFkZXIsIHF1b3RlPXF1b3RlLHNlcD1zZXApO1xufVxuXG5gYGAifQ== -->
+<pre class="r"><code>storeToPipe = function(df, file, header=TRUE, quote=&quot;&quot;, sep=&quot;|&quot;, row.names = FALSE)
+{
+  if(quote == &quot;&quot;)
+  {
+    quote = FALSE;
+  }
+  utils::write.table(df, file=file, quote = quote, col.names = header, row.name = row.names, sep = sep);
+}
+
+readFromPipe = function(file,header=TRUE, quote=&quot;&quot;, sep=&quot;|&quot;)
+{
+  utils::read.csv(file,header=header, quote=quote,sep=sep);
+}
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>##This will save data list to a file if local. If it is remote, then the professor is able to access my files.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3NhdmUgZGF0YSBsaXN0IHRvIGEgZmlsZSBpZiBsb2NhbCBcbmlmKHdoaWNoLmdpdGh1YiAhPSBcInJlbW90ZVwiKVxue1xuICBteWZpbGUgPSBwYXN0ZTAocGF0aC5kYXRhLCBcIndlbGxzLnJkc1wiKVxuICBzYXZlUkRTKG15bGlzdCxmaWxlID0gbXlmaWxlKVxuICBteWZpbGUgPSBwYXN0ZTAocGF0aC5kYXRhLCBcIndlbGxzLnR4dFwiKVxuICBzdG9yZVRvUGlwZShteWxpc3QsZmlsZSA9IG15ZmlsZSlcbn1lbHNle1xuICBteWZpbGUgPSBwYXN0ZTAocGF0aC5kYXRhLCBcIndlbGxzLnR4dFwiKVxuICBwcmludChteWZpbGUpO1xufVxuXG5gYGAifQ== -->
+<pre class="r"><code>#save data list to a file if local 
+if(which.github != &quot;remote&quot;)
+{
+  myfile = paste0(path.data, &quot;wells.rds&quot;)
+  saveRDS(mylist,file = myfile)
+  myfile = paste0(path.data, &quot;wells.txt&quot;)
+  storeToPipe(mylist,file = myfile)
+}else{
+  myfile = paste0(path.data, &quot;wells.txt&quot;)
+  print(myfile);
+}
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vazogb1dlbGwtUGFydCAxIgphdXRob3I6ICJTYXJhaCBSb25jaGV0dGkgW3NhcmFoLnJvbmNoZXR0aV0iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiNvV2VsbCAKIyNIZXJlIHdlIGFyZSBzZXR0aW5nIHVwIG91ciBHaXQgcmVtb3RlIGFuZCBHaXQgbG9jYWwgdG8gYWNjZXNzIHRoZSBkYXRhIApgYGB7cn0Kd2hpY2guZ2l0aHViID0gImxvY2FsIjsKZ2l0aHViLmxvY2FsID0gIn4vRGVza3RvcC9XU1VfU1RBVFM0MTlfMjAyMS9zcm9uY2hldC8iOwpnaXRodWIucmVtb3RlID0gImh0dHBzOi8vZ2l0aHViLmNvbS9zcm9uY2hldC9XU1VfU1RBVFM0MTlfMjAyMS5naXQiOwoKCmlmKHdoaWNoLmdpdGh1YiA9PSAicmVtb3RlIikKewogIG15cGF0aCA9IHBhc3RlMChnaXRodWIucmVtb3RlLCIvd29ya3NwYWNlL28td2VsbCIpOwp9ZWxzZXsKICBteXBhdGggPSBwYXN0ZTAoZ2l0aHViLmxvY2FsLCIvd29ya3NwYWNlL28td2VsbCIpOwp9CgpgYGAKCgpgYGB7cn0KcGF0aC5kYXRhID0gcGFzdGUwKG15cGF0aCwgImRhdGEvIikKI3JlYWQgaW4gdGhlIGRhdGEgc2V0cyAKb3dlbGwubWV0YWxzID0gcmVhZC5kZWxpbShwYXN0ZTAocGF0aC5kYXRhLCJvd2VsbC5tZXRhbHMudHh0IiksIGhlYWRlciA9IFRSVUUsIHNlcD0ifCIpOwpvd2VsbC5jaGVtaXN0cnkgPSByZWFkLmRlbGltKHBhc3RlMChwYXRoLmRhdGEsICJvd2VsbC5jaGVtaXN0cnkudHh0IiksIGhlYWRlciA9IFRSVUUsIHNlcD0ifCIpOwp3ZWxsLmxvY2F0aW9uID0gcmVhZC5kZWxpbShwYXN0ZTAocGF0aC5kYXRhLCAid2VsbHMtbG9jYXRpb24udHh0IiksIGhlYWRlcj0gVFJVRSwgc2VwID0gInwiKTsKYGBgCgpgYGB7cn0KI2J1aWxkaW5nIGRhdGEgb2JqZWN0Cm93ZWxsLm1ldGFscyRsYXRpdHVkZSA9IHdlbGwubG9jYXRpb24kbGF0aXR1ZGU7Cm93ZWxsLm1ldGFscyRsb25naXR1ZGUgPSB3ZWxsLmxvY2F0aW9uJGxvbmdpdHVkZTsKb3dlbGwubWV0YWxzJGFsdGl0dWRlLmZ0ID0gd2VsbC5sb2NhdGlvbiRhbHRpdHVkZS5mdDsKb3dlbGwubWV0YWxzJGZhdWx0ID0gd2VsbC5sb2NhdGlvbiRmYXVsdDsKb3dlbGwubWV0YWxzJGdlb2xvZ3kgPSB3ZWxsLmxvY2F0aW9uJGdlb2xvZ3k7Cgpvd2VsbC5jaGVtaXN0cnkkbGF0aXR1ZGUgPSB3ZWxsLmxvY2F0aW9uJGxhdGl0dWRlOwpvd2VsbC5jaGVtaXN0cnkkbG9uZ2l0dWRlID0gd2VsbC5sb2NhdGlvbiRsb25naXR1ZGU7Cm93ZWxsLmNoZW1pc3RyeSRhbHRpdHVkZS5mdCA9IHdlbGwubG9jYXRpb24kYWx0aXR1ZGUuZnQ7Cm93ZWxsLmNoZW1pc3RyeSRmYXVsdCA9IHdlbGwubG9jYXRpb24kZmF1bHQ7Cm93ZWxsLmNoZW1pc3RyeSRnZW9sb2d5ID0gd2VsbC5sb2NhdGlvbiRnZW9sb2d5OwoKbXlsaXN0ID0gbGlzdChvd2VsbC5jaGVtaXN0cnksIG93ZWxsLm1ldGFscykKbmFtZXMobXlsaXN0KSA9IGMoIndlbGxzJHNhdWRpJGNoZW1pc3RyeSIsIndlbGxzJHNhdWRpJG1ldGFscyIpCgpgYGAKCmBgYHtyfQojc2F2ZSBkYXRhIGxpc3QgdG8gYSBmaWxlCm15ZmlsZSA9IHBhc3RlMChwYXRoLmRhdGEsICJ3ZWxscy5yZHMiKQpzYXZlUkRTKG15bGlzdCxmaWxlID0gbXlmaWxlKQoKYGBgCgoKCgoKCgoKCgoKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vazogb1dlbGwtUGFydCAxIgphdXRob3I6ICJTYXJhaCBSb25jaGV0dGkgW3NhcmFoLnJvbmNoZXR0aV0iCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiNvV2VsbCAKIyNIZXJlIHdlIGFyZSBzZXR0aW5nIHVwIG91ciBHaXQgcmVtb3RlIGFuZCBHaXQgbG9jYWwgdG8gYWNjZXNzIHRoZSBkYXRhIApgYGB7cn0Kd2hpY2guZ2l0aHViID0gImxvY2FsIjsKZ2l0aHViLmxvY2FsID0gIn4vRGVza3RvcC9XU1VfU1RBVFM0MTlfMjAyMS9zcm9uY2hldC8iOwpnaXRodWIucmVtb3RlID0gImh0dHBzOi8vZ2l0aHViLmNvbS9zcm9uY2hldC9XU1VfU1RBVFM0MTlfMjAyMS5naXQiOwoKCmlmKHdoaWNoLmdpdGh1YiA9PSAicmVtb3RlIikKewogIG15cGF0aCA9IHBhc3RlMChnaXRodWIucmVtb3RlLCIvd29ya3NwYWNlL28td2VsbCIpOwp9ZWxzZXsKICBteXBhdGggPSBwYXN0ZTAoZ2l0aHViLmxvY2FsLCIvd29ya3NwYWNlL28td2VsbCIpOwp9CgpgYGAKCgpgYGB7cn0KcGF0aC5kYXRhID0gcGFzdGUwKG15cGF0aCwgIi9kYXRhLyIpCiNyZWFkIGluIHRoZSBkYXRhIHNldHMgCm93ZWxsLm1ldGFscyA9IHJlYWQuZGVsaW0ocGFzdGUwKHBhdGguZGF0YSwib3dlbGwubWV0YWxzLnR4dCIpLCBoZWFkZXIgPSBUUlVFLCBzZXA9InwiKTsKb3dlbGwuY2hlbWlzdHJ5ID0gcmVhZC5kZWxpbShwYXN0ZTAocGF0aC5kYXRhLCAib3dlbGwuY2hlbWlzdHJ5LnR4dCIpLCBoZWFkZXIgPSBUUlVFLCBzZXA9InwiKTsKd2VsbC5sb2NhdGlvbiA9IHJlYWQuZGVsaW0ocGFzdGUwKHBhdGguZGF0YSwgIndlbGxzLWxvY2F0aW9uLnR4dCIpLCBoZWFkZXI9IFRSVUUsIHNlcCA9ICJ8Iik7CmBgYAoKIyNUaGlzIGlzIGhvdyB3ZSBhcmUgYnVpbGRpbmcgdGhlIGRhdGEgb2JqZWN0IHNvIHdlIGNhbiBhY2Nlc3MgYW5kIGFwcGVuZCB0aGUgZGF0YSBzZXRzIHdlIGNyZWF0ZWQuCmBgYHtyfQojYnVpbGRpbmcgZGF0YSBvYmplY3QKb3dlbGwubWV0YWxzJGxhdGl0dWRlID0gd2VsbC5sb2NhdGlvbiRsYXRpdHVkZTsKb3dlbGwubWV0YWxzJGxvbmdpdHVkZSA9IHdlbGwubG9jYXRpb24kbG9uZ2l0dWRlOwpvd2VsbC5tZXRhbHMkYWx0aXR1ZGUuZnQgPSB3ZWxsLmxvY2F0aW9uJGFsdGl0dWRlLmZ0Owpvd2VsbC5tZXRhbHMkZmF1bHQgPSB3ZWxsLmxvY2F0aW9uJGZhdWx0Owpvd2VsbC5tZXRhbHMkZ2VvbG9neSA9IHdlbGwubG9jYXRpb24kZ2VvbG9neTsKCm93ZWxsLmNoZW1pc3RyeSRsYXRpdHVkZSA9IHdlbGwubG9jYXRpb24kbGF0aXR1ZGU7Cm93ZWxsLmNoZW1pc3RyeSRsb25naXR1ZGUgPSB3ZWxsLmxvY2F0aW9uJGxvbmdpdHVkZTsKb3dlbGwuY2hlbWlzdHJ5JGFsdGl0dWRlLmZ0ID0gd2VsbC5sb2NhdGlvbiRhbHRpdHVkZS5mdDsKb3dlbGwuY2hlbWlzdHJ5JGZhdWx0ID0gd2VsbC5sb2NhdGlvbiRmYXVsdDsKb3dlbGwuY2hlbWlzdHJ5JGdlb2xvZ3kgPSB3ZWxsLmxvY2F0aW9uJGdlb2xvZ3k7CgpteWxpc3QgPSBsaXN0KG93ZWxsLmNoZW1pc3RyeSwgb3dlbGwubWV0YWxzKQpuYW1lcyhteWxpc3QpID0gYygid2VsbHMkc2F1ZGkkY2hlbWlzdHJ5Iiwid2VsbHMkc2F1ZGkkbWV0YWxzIikKCmBgYAoKIyNUaGVzZSBhcmUgZnVuY3Rpb25zIGdpdmVuIHRvIHVzIGJ5IHRoZSBwcm9mZXNzb3IgaW4gb3JkZXIgdG8gcmVhZCBpbiB0aGUgZGF0YSB3aXRoIHBpcGVzLiAKYGBge3J9CnN0b3JlVG9QaXBlID0gZnVuY3Rpb24oZGYsIGZpbGUsIGhlYWRlcj1UUlVFLCBxdW90ZT0iIiwgc2VwPSJ8Iiwgcm93Lm5hbWVzID0gRkFMU0UpCnsKICBpZihxdW90ZSA9PSAiIikKICB7CiAgICBxdW90ZSA9IEZBTFNFOwogIH0KICB1dGlsczo6d3JpdGUudGFibGUoZGYsIGZpbGU9ZmlsZSwgcXVvdGUgPSBxdW90ZSwgY29sLm5hbWVzID0gaGVhZGVyLCByb3cubmFtZSA9IHJvdy5uYW1lcywgc2VwID0gc2VwKTsKfQoKcmVhZEZyb21QaXBlID0gZnVuY3Rpb24oZmlsZSxoZWFkZXI9VFJVRSwgcXVvdGU9IiIsIHNlcD0ifCIpCnsKICB1dGlsczo6cmVhZC5jc3YoZmlsZSxoZWFkZXI9aGVhZGVyLCBxdW90ZT1xdW90ZSxzZXA9c2VwKTsKfQoKYGBgCgojI1RoaXMgd2lsbCBzYXZlIGRhdGEgbGlzdCB0byBhIGZpbGUgaWYgbG9jYWwuIElmIGl0IGlzIHJlbW90ZSwgdGhlbiB0aGUgcHJvZmVzc29yIGlzIGFibGUgdG8gYWNjZXNzIG15IGZpbGVzLgoKYGBge3J9CmlmKHdoaWNoLmdpdGh1YiAhPSAicmVtb3RlIikKewogIG15ZmlsZSA9IHBhc3RlMChwYXRoLmRhdGEsICJ3ZWxscy5yZHMiKQogIHNhdmVSRFMobXlsaXN0LGZpbGUgPSBteWZpbGUpCiAgbXlmaWxlID0gcGFzdGUwKHBhdGguZGF0YSwgIndlbGxzLnR4dCIpCiAgc3RvcmVUb1BpcGUobXlsaXN0LGZpbGUgPSBteWZpbGUpCn1lbHNlewogIG15ZmlsZSA9IHBhc3RlMChwYXRoLmRhdGEsICJ3ZWxscy50eHQiKQogIHByaW50KG15ZmlsZSk7Cn0KCmBgYAoKCgoKCgoKCgoKCgo=</div>
 
 
 
