@@ -10,7 +10,7 @@ which.github = "remote";
 github.local = "~/Desktop/WSU_STATS419_2021/sronchet/";
 github.remote = "https://raw.githubusercontent.com/sronchet/WSU_STATS419_2021/main/sronchet/";
 
-if(which.github == "local")
+if(which.github == "remote")
 {
   mypath = paste0(github.remote,"workspace/o-well");
 }else{
@@ -25,6 +25,8 @@ path.data = paste0(mypath, "/data/")
 owell.metals = read.delim(paste0(path.data,"owell.metals.txt"), header = TRUE, sep="|");
 owell.chemistry = read.delim(paste0(path.data, "owell.chemistry.txt"), header = TRUE, sep="|");
 well.location = read.delim(paste0(path.data, "wells-location.txt"), header= TRUE, sep = "|");
+well.location.north = read.delim(paste0(path.data, "wells-location-north.txt"), header=TRUE, sep="|");
+well.location.south = read.delim(paste0(path.data, "wells-location-south.txt"), header= TRUE, sep="|");
 ```
 
 ```{r}
@@ -66,11 +68,18 @@ readFromPipe = function(file,header=TRUE, quote="", sep="|")
 
 ```
 
+
+##In this histogram I am showing on the x-axis the data I gathered for the faults in the north. On the y-axis it is showing the frequency of the data provided. 
 ```{r}
 
-hist(well.location$fault)
+hist(well.location.north$fault, xlab="Faults in the North", ylab= "Frequency", main = "Histogram of the Frequency of Faults in the North"); 
 
+```
+##In the next histogram I am displaying similar data as the histogram above, except I am showing the faults and the frequency that occurs in the south of Saudi Arabia 
+```{r}
 
+hist(well.location.south$fault, xlab="Faults in the South", ylab= "Frequency", main = "Histogram of the Frequency of Faults in the South");
 
 
 ```
+##After comparing the two datasets you can see there are a lot more faults in the north that are between 1000-1500 meters and with a frequency of 4. On the other hand, in the south the frequency reaches 5 between 0 and 50 meters. 
