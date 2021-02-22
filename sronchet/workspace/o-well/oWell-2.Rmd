@@ -1,0 +1,76 @@
+---
+title: "R Notebook: oWell-Part 2"
+author: "Sarah Ronchetti | 11515255"
+output: html_notebook
+---
+
+##Here we are setting up our Git remote and Git local to access the data 
+```{r}
+which.github = "remote";
+github.local = "~/Desktop/WSU_STATS419_2021/sronchet/";
+github.remote = "https://raw.githubusercontent.com/sronchet/WSU_STATS419_2021/main/sronchet/";
+
+if(which.github == "local")
+{
+  mypath = paste0(github.remote,"workspace/o-well");
+}else{
+  mypath = paste0(github.local,"workspace/o-well");
+}
+
+```
+
+
+```{r}
+path.data = paste0(mypath, "/data/")
+owell.metals = read.delim(paste0(path.data,"owell.metals.txt"), header = TRUE, sep="|");
+owell.chemistry = read.delim(paste0(path.data, "owell.chemistry.txt"), header = TRUE, sep="|");
+well.location = read.delim(paste0(path.data, "wells-location.txt"), header= TRUE, sep = "|");
+```
+
+```{r}
+
+#building data object
+owell.metals$latitude = well.location$latitude;
+owell.metals$longitude = well.location$longitude;
+owell.metals$altitude.ft = well.location$altitude.ft;
+owell.metals$fault = well.location$fault;
+owell.metals$geology = well.location$geology;
+
+owell.chemistry$latitude = well.location$latitude;
+owell.chemistry$longitude = well.location$longitude;
+owell.chemistry$altitude.ft = well.location$altitude.ft;
+owell.chemistry$fault = well.location$fault;
+owell.chemistry$geology = well.location$geology;
+
+wells = list(); 
+  wells$saudi = list(); 
+  wells$saudi$metals = owell.metals;
+  wells$saudi$chemistry = owell.chemistry;
+
+```
+
+```{r}
+storeToPipe = function(df, file, header=TRUE, quote="", sep="|", row.names = FALSE)
+{
+  if(quote == "")
+  {
+    quote = FALSE;
+  }
+  utils::write.table(df, file=file, quote = quote, col.names = header, row.name = row.names, sep = sep);
+}
+
+readFromPipe = function(file,header=TRUE, quote="", sep="|")
+{
+  utils::read.csv(file,header=header, quote=quote,sep=sep);
+}
+
+```
+
+```{r}
+
+hist(well.location$fault)
+
+
+
+
+```
