@@ -58,15 +58,29 @@ We are going to use exploratory techniques to examine some Indeed.com data.  Thi
 
 <HR divider="2" style="border: 2px solid #981e32; border-radius: 2px;">
 
+
 ### Include Functions
 ```{r}
-github.monte = "https://raw.githubusercontent.com/MonteShaffer/";
-include.me = paste0(github.monte, "humanVerseWSU/master/misc/functions-midterm-F2000.R");  # # should be 2020 ... oh well ...
-include.me;
 
-#library(devtools);
-#source_url(include.me);
-source(include.me);
+which.github = "remote";
+github.remote = "https://raw.githubusercontent.com/MonteShaffer/";
+#github.remote = "https://raw.githubusercontent.com/sronchet/WSU_STATS419_2021/main/sronchet/";
+
+if(which.github == "remote")
+{
+  mypath = paste0(github.remote,"humanVerseWSU/master/misc/functions-midterm-F2000.R");
+}else{
+  mypath = paste0(github.remote,"humanVerseWSU/master/misc/functions-midterm-F2000.R");
+}
+
+#github.monte = "https://raw.githubusercontent.com/MonteShaffer/";
+#include.me = paste0(github.monte, "humanVerseWSU/master/misc/functions-midterm-F2000.R");  # # should be 2020 ... oh well ...
+#include.me;
+
+
+##library(devtools);
+##source_url(include.me);
+#source(include.me);
 
 
 readFromPipe = function(file, header=TRUE, quote="", sep="|")
@@ -99,15 +113,15 @@ summary(jobs$job.count);
 ### Include Functions (More)
 ```{r}
 # https://raw.githubusercontent.com/MonteShaffer/humanVerse/main/humanVerse/R/functions-dataframe.R
-include.me = paste0(github.monte, "humanVerse/main/humanVerse/R/functions-dataframe.R");  
+include.me = paste0(github.remote, "humanVerse/main/humanVerse/R/functions-dataframe.R");  
 #library(devtools);
 #source_url(include.me);
 source(include.me); # subsetDataFrame
 
-include.me = paste0(github.monte, "humanVerse/main/humanVerse/R/functions-str.R");  
+include.me = paste0(github.remote, "humanVerse/main/humanVerse/R/functions-str.R");  
 source(include.me); # trimMe
 
-include.me = paste0(github.monte, "humanVerse/main/humanVerse/R/functions-vector.R");  
+include.me = paste0(github.remote, "humanVerse/main/humanVerse/R/functions-vector.R");  
 source(include.me); # findAllIndexesWithValueInVector
 
 ```
