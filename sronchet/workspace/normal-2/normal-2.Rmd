@@ -26,6 +26,9 @@ source(include.me); # findAllIndexesWithValueInVector
 include.me = paste0(github.monte, "humanVerse/main/misc/functions-integrate2.R");  
 source(include.me); # parseNumericalFunctionString
 
+include.me = paste0(github.monte, "humanVerse/humanVerse/R/functions-get-set.R");
+source(include.me);
+
 
 # https://brand.wsu.edu/visual/colors/
 wsu.crimson = "#981e32";

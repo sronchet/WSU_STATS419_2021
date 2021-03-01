@@ -1,0 +1,104 @@
+---
+title: "R Notebook: oWell-Part 3"
+author: "Sarah Ronchetti | 11515255"
+output: html_notebook
+---
+
+```{r}
+
+library("ggplot2")
+
+```
+
+##Here we are setting up our Git remote and Git local to access the data 
+```{r}
+which.github = "remote";
+github.local = "~/Desktop/WSU_STATS419_2021/sronchet/";
+github.remote = "https://raw.githubusercontent.com/sronchet/WSU_STATS419_2021/main/sronchet/";
+
+if(which.github == "remote")
+{
+  mypath = paste0(github.remote,"workspace/o-well");
+}else{
+  mypath = paste0(github.local,"workspace/o-well");
+}
+
+```
+
+
+```{r}
+path.data = paste0(mypath, "/data/")
+owell.metals = read.delim(paste0(path.data,"owell.metals.txt"), header = TRUE, sep="|");
+owell.chemistry = read.delim(paste0(path.data, "owell.chemistry.txt"), header = TRUE, sep="|");
+well.location = read.delim(paste0(path.data, "wells-location.txt"), header= TRUE, sep = "|");
+well.location.north = read.delim(paste0(path.data, "wells-location-north.txt"), header=TRUE, sep="|");
+well.location.south = read.delim(paste0(path.data, "wells-location-south.txt"), header= TRUE, sep="|");
+```
+
+```{r}
+
+#building data object
+owell.metals$latitude = well.location$latitude;
+owell.metals$longitude = well.location$longitude;
+owell.metals$altitude.ft = well.location$altitude.ft;
+owell.metals$fault = well.location$fault;
+owell.metals$geology = well.location$geology;
+
+owell.chemistry$latitude = well.location$latitude;
+owell.chemistry$longitude = well.location$longitude;
+owell.chemistry$altitude.ft = well.location$altitude.ft;
+owell.chemistry$fault = well.location$fault;
+owell.chemistry$geology = well.location$geology;
+
+wells = list(); 
+  wells$saudi = list(); 
+  wells$saudi$metals = owell.metals;
+  wells$saudi$chemistry = owell.chemistry;
+
+```
+
+```{r}
+storeToPipe = function(df, file, header=TRUE, quote="", sep="|", row.names = FALSE)
+{
+  if(quote == "")
+  {
+    quote = FALSE;
+  }
+  utils::write.table(df, file=file, quote = quote, col.names = header, row.name = row.names, sep = sep);
+}
+
+readFromPipe = function(file,header=TRUE, quote="", sep="|")
+{
+  utils::read.csv(file,header=header, quote=quote,sep=sep);
+}
+
+```
+
+#owell 3
+##The scatterplot below displays the data found between the latitude and the geology (type of rock). 
+```{r}
+ggplot(well.location, aes(x=geology, y=latitude))+geom_point()+theme(axis.text.x=element_text(angle=90))+ggtitle("Scatter Plot Comparing Geology to Latitude")+(theme(plot.title = element_text(hjust = 0.5)))
+
+```
+
+##The scatterplot below displays the data found between the longitude and the geology (type of rock).
+```{r}
+ggplot(well.location, aes(x=geology, y=longitude))+geom_point()+theme(axis.text.x=element_text(angle=90))+ggtitle("Scatter Plot Comparing Geology to Longitude")+(theme(plot.title = element_text(hjust = 0.5)))
+
+```
+
+#owell 2
+##In this histogram I am showing on the x-axis the data I gathered for the faults in the north. On the y-axis it is showing the frequency of the data provided. 
+```{r}
+
+hist(well.location.north$fault, xlab="Faults in the North", ylab= "Frequency", main = "Histogram of the Frequency of Faults in the North"); 
+
+```
+
+##In the next histogram I am displaying similar data as the histogram above, except I am showing the faults and the frequency that occurs in the south of Saudi Arabia 
+```{r}
+
+hist(well.location.south$fault, xlab="Faults in the South", ylab= "Frequency", main = "Histogram of the Frequency of Faults in the South");
+
+
+```
